@@ -25,6 +25,10 @@ impl UserInput {
             input: String::with_capacity(256),
         }
     }
+
+    pub fn clear(&mut self) {
+        self.input.clear();
+    }
 }
 
 impl Drop for SmashState {
@@ -101,6 +105,7 @@ impl SmashState {
             }
             (KeyCode::Enter, KeyModifiers::NONE) => {
                 execute!(std::io::stdout(), Print("\r\n")).ok();
+                self.input.clear();
                 self.render_prompt();
             }
             (KeyCode::Esc, KeyModifiers::NONE) => {
